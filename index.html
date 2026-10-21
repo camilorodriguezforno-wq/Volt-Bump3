@@ -1,1 +1,363 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpeedBank | Smart Energy</title>
+<style>
+:root {
+  --bg: #09111f;
+  --panel: #111d2e;
+  --border: #26364b;
+  --text: #f1f6ff;
+  --muted: #98a9bf;
+  --green: #a8f06a;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+button, input { font: inherit; }
+button { cursor: pointer; }
+.layout { display: flex; min-height: 100vh; }
+aside {
+  width: 235px; padding: 26px 17px;
+  border-right: 1px solid var(--border);
+  background: #0b1524;
+}
+.logo { font-size: 23px; font-weight: 800; }
+.logo span { color: var(--green); }
+.tagline { color: var(--muted); font-size: 12px; margin: 8px 0 35px; }
+nav button {
+  display: block; width: 100%; text-align: left;
+  color: var(--muted); background: transparent;
+  border: 0; padding: 13px; margin: 4px 0;
+  border-radius: 9px;
+}
+nav button:hover, nav button.active {
+  background: #1b2c3f; color: var(--green);
+}
+main { flex: 1; min-width: 0; padding: 30px; }
+header {
+  display: flex; justify-content: space-between;
+  align-items: center; gap: 15px; margin-bottom: 28px;
+}
+h1 { font-size: 28px; margin: 0 0 8px; }
+h2 { font-size: 19px; }
+p { line-height: 1.6; }
+.muted { color: var(--muted); }
+.pill {
+  border: 1px solid #36533a; color: var(--green);
+  padding: 8px 12px; border-radius: 30px; font-size: 12px;
+}
+.grid {
+  display: grid; grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 14px; margin-bottom: 20px;
+}
+.card {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 15px; padding: 20px; min-width: 0;
+}
+.metric { font-size: 28px; font-weight: 750; margin: 16px 0 8px; }
+.green { color: var(--green); }
+.small { font-size: 12px; color: var(--muted); }
+.columns {
+  display: grid; grid-template-columns: 1.4fr 1fr;
+  gap: 18px;
+}
+.chart {
+  height: 170px; display: flex; align-items: end;
+  gap: 8px; padding-top: 15px;
+}
+.bar {
+  flex: 1; min-width: 3px; background: var(--green);
+  border-radius: 5px 5px 0 0; opacity: .85;
+}
+.btn {
+  padding: 12px 16px; border: 0; border-radius: 9px;
+  background: var(--green); color: #101b12;
+  font-weight: 700;
+}
+.btn.secondary {
+  background: #24354b; color: var(--text);
+}
+input {
+  width: 100%; padding: 12px; margin: 7px 0 15px;
+  background: #0b1524; color: white;
+  border: 1px solid var(--border); border-radius: 8px;
+}
+label { font-size: 13px; color: var(--muted); }
+.page { display: none; }
+.page.active { display: block; }
+.product { margin-bottom: 14px; }
+.product .metric { font-size: 21px; }
+.notice {
+  border-left: 3px solid var(--green);
+  padding: 12px 15px; background: #15251f;
+  color: #d9e8dd; font-size: 13px; margin-top: 18px;
+}
+footer { color: var(--muted); font-size: 11px; margin-top: 25px; }
+@media(max-width:900px) {
+  .grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .columns { grid-template-columns: 1fr; }
+}
+@media(max-width:600px) {
+  .layout { display: block; }
+  aside { width: 100%; padding: 15px; }
+  .tagline { margin: 5px 0 12px; }
+  nav { display: flex; flex-wrap: wrap; }
+  nav button { width: auto; padding: 10px; }
+  main { padding: 18px; }
+  h1 { font-size: 23px; }
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside>
+  <div class="logo">⚡ Speed<span>Bank</span></div>
+  <div class="tagline">TURN TRAFFIC INTO ENERGY</div>
+  <nav>
+    <button class="active" data-page="dashboard">▦ Dashboard</button>
+    <button data-page="how">↗ How It Works</button>
+    <button data-page="impact">◎ Energy & Impact</button>
+    <button data-page="shop">◇ Products & Shop</button>
+    <button data-page="about">ⓘ About Us</button>
+    <button data-page="account">♙ Sign In</button>
+  </nav>
+  <footer>DEMO PROJECT · 2026</footer>
+</aside>
+
+<main>
+<header>
+  <div>
+    <h1 id="pageTitle">Energy Dashboard</h1>
+    <div class="muted">Smarter roads. A more sustainable future.</div>
+  </div>
+  <div class="pill">● DEMO MODE</div>
+</header>
+
+<section id="dashboard" class="page active">
+  <div class="grid">
+    <div class="card"><div class="small">ENERGY HARVESTED</div>
+      <div class="metric"><span id="energy">0.024</span> <span class="green">Wh</span></div>
+      <div class="small">Simulated demonstration</div></div>
+    <div class="card"><div class="small">VEHICLE PASSES</div>
+      <div class="metric" id="cars">120</div>
+      <div class="small">Demo counter</div></div>
+    <div class="card"><div class="small">INSTANT POWER</div>
+      <div class="metric"><span id="power">12.0</span> <span class="green">W</span></div>
+      <div class="small">Illustrative peak</div></div>
+    <div class="card"><div class="small">SYSTEM STATUS</div>
+      <div class="metric green" style="font-size:22px">● Online</div>
+      <div class="small">Software simulation only</div></div>
+  </div>
+  <div class="columns">
+    <div class="card">
+      <h2>Energy Production</h2>
+      <p class="muted small">Illustrative hourly output · not measured data</p>
+      <div class="chart" id="chart"></div>
+      <div class="small">06:00　 09:00　 12:00　 15:00　 18:00</div>
+    </div>
+    <div class="card">
+      <h2>Live Demonstration</h2>
+      <p class="muted">Simulate a vehicle passing over the energy-harvesting speed bump.</p>
+      <div class="metric green" id="demoEnergy">0.000 Wh</div>
+      <button class="btn" id="pass">＋ Simulate Vehicle Pass</button>
+      <button class="btn secondary" id="reset">Reset Demo</button>
+      <p class="small">Example setting: 0.2 Wh per pass. Replace with measured prototype data.</p>
+    </div>
+  </div>
+  <div class="notice">Demo data is illustrative. No physical sensor or generator is connected. Actual energy output must be measured.</div>
+</section>
+
+<section id="how" class="page">
+  <div class="card">
+    <h2>How SpeedBank Works</h2>
+    <p class="muted">A concept for harvesting a small amount of energy from road traffic.</p>
+    <div class="grid">
+      <div><div class="metric green">01</div><h3>Vehicle Pressure</h3><p>A vehicle passes over a specially engineered road module.</p></div>
+      <div><div class="metric green">02</div><h3>Mechanical Motion</h3><p>A moving mechanism transfers part of the applied force.</p></div>
+      <div><div class="metric green">03</div><h3>Electricity</h3><p>A generator converts mechanical motion into electrical energy.</p></div>
+      <div><div class="metric green">04</div><h3>Storage</h3><p>Suitable electronics manage and store the harvested energy.</p></div>
+    </div>
+    <h2>Possible Applications</h2>
+    <p>Low-power LEDs, road sensors, counters and educational monitoring systems.</p>
+    <div class="notice">Engineering challenge: the system must be safe, durable, weather-resistant and efficient. Road traffic safety and vehicle comfort come first.</div>
+  </div>
+</section>
+
+<section id="impact" class="page">
+  <div class="columns">
+    <div class="card">
+      <h2>Energy Scenario Calculator</h2>
+      <p class="muted">Explore a hypothetical scenario. These are editable assumptions, not test results.</p>
+      <label>Vehicle passes per day</label>
+      <input type="number" id="traffic" value="1000" min="0">
+      <label>Energy captured per pass (Wh)</label>
+      <input type="number" id="perPass" value="0.2" min="0" step="0.01">
+      <label>Operating days per year</label>
+      <input type="number" id="days" value="365" min="0" max="365">
+      <button class="btn" id="calculate">Calculate Scenario</button>
+    </div>
+    <div class="card">
+      <h2>Estimated Results</h2>
+      <div class="small">DAILY ENERGY</div>
+      <div class="metric green" id="daily">200 Wh</div>
+      <div class="small">ANNUAL ENERGY</div>
+      <div class="metric" id="annual">73 kWh</div>
+      <p class="muted small">Gross theoretical estimate before system losses, downtime and maintenance.</p>
+    </div>
+  </div>
+  <div class="notice">Environmental benefits depend on measured output and the electricity source being displaced. Energy harvesting is not automatically carbon-neutral.</div>
+</section>
+
+<section id="shop" class="page">
+  <div class="card product">
+    <h2>01 · Educational Prototype</h2>
+    <div class="metric green">School Project</div>
+    <p class="muted">A small demonstration model with a moving plate, spring, generator and LED indicator.</p>
+    <button class="btn secondary" data-info="prototype">View Components</button>
+  </div>
+  <div class="card product">
+    <h2>02 · Energy Monitoring Kit</h2>
+    <div class="metric green">Concept Product</div>
+    <p class="muted">Voltage and current measurement, a microcontroller and a simple monitoring display.</p>
+    <button class="btn secondary" data-info="monitor">View Components</button>
+  </div>
+  <div class="card product">
+    <h2>03 · Smart Road System</h2>
+    <div class="metric green">Future Concept</div>
+    <p class="muted">A proposed modular system for controlled testing and low-power road infrastructure.</p>
+    <button class="btn secondary" data-info="road">View Concept</button>
+  </div>
+  <div id="productInfo" class="notice">Product concepts only. No items are currently for sale.</div>
+</section>
+
+<section id="about" class="page">
+  <div class="card">
+    <h2>Our Mission</h2>
+    <p>SpeedBank explores how everyday movement could contribute to small-scale energy generation. We want to encourage innovation, sustainability and smarter infrastructure.</p>
+    <h2>Our Vision</h2>
+    <p>To investigate practical ways of recovering otherwise unused mechanical energy and applying it to useful low-power devices.</p>
+    <h2>Why SpeedBank?</h2>
+    <p>Our project connects science, engineering, environmental awareness and business thinking in one demonstrable concept.</p>
+    <div class="notice">Our next milestone: build a safe prototype, measure its electrical output and compare results with our simulations.</div>
+  </div>
+</section>
+
+<section id="account" class="page">
+  <div class="card" style="max-width:460px;margin:auto">
+    <h2 id="authTitle">Welcome Back</h2>
+    <p class="muted">Access your SpeedBank demonstration dashboard.</p>
+    <label>Email address</label>
+    <input type="email" id="email" placeholder="student@example.com">
+    <label>Password</label>
+    <input type="password" id="password" placeholder="Enter any demo password">
+    <button class="btn" id="login">Sign In</button>
+    <button class="btn secondary" id="logout" style="display:none">Sign Out</button>
+    <p class="small" id="authMessage">School demo only. Do not enter a real password.</p>
+  </div>
+</section>
+
+<footer>SpeedBank Student Innovation Project · Concept and simulated data · 2026</footer>
+</main>
+</div>
+
+<script>
+const titles = {
+  dashboard:"Energy Dashboard",
+  how:"How It Works",
+  impact:"Energy & Impact",
+  shop:"Products & Shop",
+  about:"About SpeedBank",
+  account:"Your Account"
+};
+
+document.querySelectorAll("nav button").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    button.classList.add("active");
+    document.getElementById(button.dataset.page).classList.add("active");
+    document.getElementById("pageTitle").textContent = titles[button.dataset.page];
+  });
+});
+
+let passes = 0;
+let energy = 0;
+const energyPerPass = 0.2;
+
+function updateDemo() {
+  document.getElementById("cars").textContent = 120 + passes;
+  document.getElementById("demoEnergy").textContent = energy.toFixed(2) + " Wh";
+  document.getElementById("energy").textContent = (0.024 + energy).toFixed(3);
+  document.getElementById("power").textContent = passes ? "12.0" : "0.0";
+}
+document.getElementById("pass").addEventListener("click", () => {
+  passes++;
+  energy += energyPerPass;
+  updateDemo();
+});
+document.getElementById("reset").addEventListener("click", () => {
+  passes = 0;
+  energy = 0;
+  updateDemo();
+});
+
+function calculate() {
+  const traffic = Math.max(0, Number(document.getElementById("traffic").value) || 0);
+  const perPass = Math.max(0, Number(document.getElementById("perPass").value) || 0);
+  const days = Math.min(365, Math.max(0, Number(document.getElementById("days").value) || 0));
+  const dailyWh = traffic * perPass;
+  document.getElementById("daily").textContent = dailyWh.toLocaleString(undefined,{maximumFractionDigits:2}) + " Wh";
+  document.getElementById("annual").textContent = (dailyWh * days / 1000).toLocaleString(undefined,{maximumFractionDigits:2}) + " kWh";
+}
+document.getElementById("calculate").addEventListener("click", calculate);
+
+const bars = [25,38,32,55,46,75,58,90,65,43,35,22];
+document.getElementById("chart").innerHTML = bars.map((h,i) =>
+  `<div class="bar" title="Illustrative value ${h}" style="height:${h}%"></div>`
+).join("");
+
+const products = {
+  prototype:"Suggested research list: springs, a guided moving plate, a small DC motor used as a generator, wires, an LED and a multimeter. Build only a safe, low-force tabletop model with adult supervision.",
+  monitor:"Suggested research list: voltage/current sensor, microcontroller, display and a suitable protected low-voltage circuit. Check component ratings before connecting anything.",
+  road:"Future concept only. A real road installation requires qualified engineering, structural testing, weather protection and road-safety approval."
+};
+document.querySelectorAll("[data-info]").forEach(button => {
+  button.addEventListener("click", () => {
+    document.getElementById("productInfo").textContent = products[button.dataset.info];
+  });
+});
+
+let signedIn = false;
+document.getElementById("login").addEventListener("click", () => {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const message = document.getElementById("authMessage");
+  if (!email.includes("@") || password.length < 1) {
+    message.textContent = "Enter a valid demo email and any non-empty demo password.";
+    return;
+  }
+  signedIn = true;
+  message.textContent = "Demo sign-in successful. This is not a secure real account.";
+  document.getElementById("authTitle").textContent = "Welcome to SpeedBank";
+  document.getElementById("login").style.display = "none";
+  document.getElementById("logout").style.display = "inline-block";
+});
+document.getElementById("logout").addEventListener("click", () => {
+  signedIn = false;
+  document.getElementById("authTitle").textContent = "Welcome Back";
+  document.getElementById("authMessage").textContent = "You have signed out of the demo.";
+  document.getElementById("login").style.display = "inline-block";
+  document.getElementById("logout").style.display = "none";
+});
+calculate();
+</script>
+</body>
+</html>

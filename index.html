@@ -4,360 +4,814 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SpeedBank | Smart Energy</title>
+<meta name="theme-color" content="#080D16">
+<title>SpeedBank — Intelligence in Motion</title>
 <style>
 :root {
-  --bg: #09111f;
-  --panel: #111d2e;
-  --border: #26364b;
-  --text: #f1f6ff;
-  --muted: #98a9bf;
-  --green: #a8f06a;
+  --bg:#080D16;
+  --surface:#101824;
+  --surface2:#151F2D;
+  --line:#263344;
+  --text:#F2F6FC;
+  --muted:#8F9DB0;
+  --green:#B7F56A;
+  --green2:#7CE7A5;
+  --blue:#6CA9FF;
+  --radius:18px;
 }
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Arial, sans-serif;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:14px;line-height:1.6
 }
-button, input { font: inherit; }
-button { cursor: pointer; }
-.layout { display: flex; min-height: 100vh; }
-aside {
-  width: 235px; padding: 26px 17px;
-  border-right: 1px solid var(--border);
-  background: #0b1524;
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{
+  outline:2px solid var(--green);outline-offset:3px
 }
-.logo { font-size: 23px; font-weight: 800; }
-.logo span { color: var(--green); }
-.tagline { color: var(--muted); font-size: 12px; margin: 8px 0 35px; }
-nav button {
-  display: block; width: 100%; text-align: left;
-  color: var(--muted); background: transparent;
-  border: 0; padding: 13px; margin: 4px 0;
-  border-radius: 9px;
+button:disabled{opacity:.45;cursor:not-allowed}
+a{color:inherit;text-decoration:none}
+button{color:inherit}
+::selection{background:var(--green);color:#080D16}
+.shell{min-height:100vh}
+.hidden{display:none!important}
+.muted{color:var(--muted)}
+.green{color:var(--green)}
+.eyebrow{
+  color:var(--green);font-size:10px;font-weight:800;
+  letter-spacing:2.2px;text-transform:uppercase
 }
-nav button:hover, nav button.active {
-  background: #1b2c3f; color: var(--green);
+.brand{display:flex;align-items:center;gap:11px;font-weight:850;font-size:21px;letter-spacing:-1px}
+.brand-icon{
+  width:37px;height:37px;display:grid;place-items:center;
+  border-radius:12px;background:var(--green);color:#09110A;font-size:21px
 }
-main { flex: 1; min-width: 0; padding: 30px; }
-header {
-  display: flex; justify-content: space-between;
-  align-items: center; gap: 15px; margin-bottom: 28px;
+.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:2px;font-weight:600}
+.btn{
+  border:1px solid transparent;border-radius:10px;padding:12px 17px;
+  font-weight:750;background:var(--green);color:#0A1208;
+  transition:transform .2s,background .2s;display:inline-flex;
+  align-items:center;justify-content:center;gap:9px
 }
-h1 { font-size: 28px; margin: 0 0 8px; }
-h2 { font-size: 19px; }
-p { line-height: 1.6; }
-.muted { color: var(--muted); }
-.pill {
-  border: 1px solid #36533a; color: var(--green);
-  padding: 8px 12px; border-radius: 30px; font-size: 12px;
+.btn:hover{transform:translateY(-2px);background:#D0FF99}
+.btn.ghost{background:transparent;color:var(--text);border-color:var(--line)}
+.btn.ghost:hover{background:var(--surface2)}
+.btn.small{padding:8px 12px;font-size:12px}
+.btn.full{width:100%}
+.input{
+  display:block;width:100%;padding:13px 14px;background:#0B121D;
+  border:1px solid var(--line);border-radius:10px;color:var(--text);
+  margin-top:7px;margin-bottom:17px
 }
-.grid {
-  display: grid; grid-template-columns: repeat(4,minmax(0,1fr));
-  gap: 14px; margin-bottom: 20px;
+label{display:block;color:#BAC5D5;font-size:12px;font-weight:650}
+select.input{appearance:auto}
+hr{border:0;border-top:1px solid var(--line);margin:24px 0}
+h1,h2,h3,p{margin-top:0}
+h1{font-size:clamp(34px,5vw,62px);line-height:1.05;letter-spacing:-2.7px}
+h2{font-size:23px;letter-spacing:-.7px;line-height:1.25}
+h3{font-size:15px}
+p{color:#AAB7C8}
+.small{font-size:11px}
+.tag{
+  display:inline-flex;align-items:center;gap:7px;
+  border:1px solid var(--line);border-radius:30px;padding:6px 10px;
+  color:#BDCAD9;font-size:10px;font-weight:700
 }
-.card {
-  background: var(--panel); border: 1px solid var(--border);
-  border-radius: 15px; padding: 20px; min-width: 0;
+.dot{width:7px;height:7px;background:var(--green);border-radius:50%;display:inline-block}
+.grid{display:grid;gap:16px}
+.card{
+  background:linear-gradient(145deg,#121C2A,#0E1622);
+  border:1px solid var(--line);border-radius:var(--radius);padding:22px;
+  min-width:0
 }
-.metric { font-size: 28px; font-weight: 750; margin: 16px 0 8px; }
-.green { color: var(--green); }
-.small { font-size: 12px; color: var(--muted); }
-.columns {
-  display: grid; grid-template-columns: 1.4fr 1fr;
-  gap: 18px;
+.card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}
+.card-head h2,.card-head h3{margin:0}
+.metric{font-size:clamp(25px,3vw,36px);font-weight:800;letter-spacing:-1.4px;line-height:1.2}
+.metric-label{font-size:11px;color:var(--muted);margin-bottom:12px}
+.delta{font-size:11px;color:var(--green);margin-top:8px}
+.progress{height:6px;background:#253143;border-radius:8px;overflow:hidden}
+.progress span{height:100%;display:block;background:var(--green);border-radius:8px;transition:width .4s}
+.topbar{
+  height:76px;border-bottom:1px solid var(--line);display:flex;
+  align-items:center;justify-content:space-between;padding:0 30px;
+  position:sticky;top:0;z-index:20;background:#080D16F2;backdrop-filter:blur(16px)
 }
-.chart {
-  height: 170px; display: flex; align-items: end;
-  gap: 8px; padding-top: 15px;
+.top-actions{display:flex;align-items:center;gap:12px}
+.avatar{
+  width:36px;height:36px;border-radius:12px;background:#273A2B;
+  color:var(--green);display:grid;place-items:center;font-weight:800
 }
-.bar {
-  flex: 1; min-width: 3px; background: var(--green);
-  border-radius: 5px 5px 0 0; opacity: .85;
+.app-layout{display:grid;grid-template-columns:235px minmax(0,1fr);min-height:calc(100vh - 76px)}
+.sidebar{
+  border-right:1px solid var(--line);padding:25px 14px;
+  display:flex;flex-direction:column;gap:7px
 }
-.btn {
-  padding: 12px 16px; border: 0; border-radius: 9px;
-  background: var(--green); color: #101b12;
-  font-weight: 700;
+.nav-label{font-size:9px;color:#65758B;letter-spacing:1.8px;font-weight:800;padding:20px 12px 8px}
+.nav-btn{
+  background:transparent;border:0;text-align:left;padding:12px;
+  border-radius:10px;color:#91A0B4;display:flex;align-items:center;gap:12px;
+  width:100%;font-size:12px;font-weight:650
 }
-.btn.secondary {
-  background: #24354b; color: var(--text);
+.nav-btn .ico{width:20px;text-align:center;font-size:16px}
+.nav-btn:hover,.nav-btn.active{background:#1A2A28;color:var(--green)}
+.sidebar-bottom{margin-top:auto;padding:13px}
+.content{padding:32px;min-width:0;max-width:1600px;width:100%;margin:auto}
+.page{display:none;animation:fade .3s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.page-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:28px}
+.page-heading h1{font-size:30px;letter-spacing:-1px;margin-bottom:8px}
+.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:17px}
+.stat-icon{
+  width:35px;height:35px;border-radius:10px;display:grid;place-items:center;
+  background:#22352B;color:var(--green);margin-bottom:18px;font-size:16px
 }
-input {
-  width: 100%; padding: 12px; margin: 7px 0 15px;
-  background: #0b1524; color: white;
-  border: 1px solid var(--border); border-radius: 8px;
+.chart{width:100%;height:205px;display:block;overflow:visible}
+.chart text{fill:#7D8DA1;font-size:10px}
+.chart-grid{stroke:#293646;stroke-width:1;stroke-dasharray:3 6}
+.chart-line{fill:none;stroke:var(--green);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.chart-area{fill:url(#chartFill)}
+.dashboard-main{grid-template-columns:minmax(0,1.6fr) minmax(260px,1fr);margin-bottom:17px}
+.activity{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid #263344}
+.activity:last-child{border:0}
+.activity-icon{width:36px;height:36px;border-radius:10px;background:#1D2D2B;display:grid;place-items:center;color:var(--green)}
+.activity-copy{flex:1}
+.activity-copy strong{display:block;font-size:12px}
+.activity-copy span{font-size:10px;color:var(--muted)}
+.activity-value{font-weight:800;font-size:12px}
+.hero{
+  position:relative;overflow:hidden;border-radius:25px;
+  background:radial-gradient(ellipse at 82% 30%,#233D35 0%,transparent 45%),
+  linear-gradient(120deg,#131F2A,#101820 60%,#0C1817);
+  border:1px solid #33483C;padding:clamp(25px,5vw,55px);margin-bottom:22px
 }
-label { font-size: 13px; color: var(--muted); }
-.page { display: none; }
-.page.active { display: block; }
-.product { margin-bottom: 14px; }
-.product .metric { font-size: 21px; }
-.notice {
-  border-left: 3px solid var(--green);
-  padding: 12px 15px; background: #15251f;
-  color: #d9e8dd; font-size: 13px; margin-top: 18px;
+.hero:after{
+  content:"";position:absolute;width:300px;height:300px;right:-100px;top:-130px;
+  border:1px solid #B7F56A25;border-radius:50%;box-shadow:0 0 0 40px #B7F56A08,0 0 0 80px #B7F56A06;
+  pointer-events:none
 }
-footer { color: var(--muted); font-size: 11px; margin-top: 25px; }
-@media(max-width:900px) {
-  .grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
-  .columns { grid-template-columns: 1fr; }
+.hero-copy{position:relative;z-index:1;max-width:580px}
+.hero h1{margin:20px 0;font-size:clamp(38px,6vw,68px)}
+.hero h1 span{color:var(--green)}
+.hero p{max-width:490px;font-size:15px;line-height:1.9}
+.hero-actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:25px}
+.hero-art{position:absolute;right:3%;bottom:0;width:45%;height:100%;pointer-events:none;opacity:.9}
+.section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:30px 0 16px}
+.section-title h2{margin:0}
+.features{grid-template-columns:repeat(3,minmax(0,1fr))}
+.feature-icon{font-size:24px;color:var(--green);margin-bottom:18px}
+.feature h3{margin-bottom:9px}
+.feature p{font-size:12px;margin-bottom:0}
+.onboarding{
+  min-height:100vh;display:grid;grid-template-columns:1fr 1fr;
+  background:var(--bg)
 }
-@media(max-width:600px) {
-  .layout { display: block; }
-  aside { width: 100%; padding: 15px; }
-  .tagline { margin: 5px 0 12px; }
-  nav { display: flex; flex-wrap: wrap; }
-  nav button { width: auto; padding: 10px; }
-  main { padding: 18px; }
-  h1 { font-size: 23px; }
+.onboard-left{
+  padding:clamp(25px,6vw,75px);display:flex;flex-direction:column;
+  justify-content:space-between;background:
+  radial-gradient(ellipse at 30% 55%,#20382B 0%,transparent 55%),#0B131F;
+  border-right:1px solid var(--line);min-height:100vh
+}
+.onboard-title{max-width:550px;margin:auto 0}
+.onboard-title h1{font-size:clamp(42px,5vw,68px);margin:20px 0}
+.onboard-title h1 span{color:var(--green)}
+.onboard-right{padding:clamp(22px,5vw,65px);display:flex;align-items:center;justify-content:center}
+.form-wrap{max-width:440px;width:100%}
+.step-dots{display:flex;gap:7px;margin:20px 0 30px}
+.step-dots span{height:4px;flex:1;border-radius:4px;background:#293547}
+.step-dots span.on{background:var(--green)}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0 23px}
+.choice{
+  border:1px solid var(--line);border-radius:12px;padding:15px;
+  background:#0D1521;text-align:left;min-height:91px
+}
+.choice:hover,.choice.selected{border-color:var(--green);background:#17251F}
+.choice b{display:block;font-size:12px;margin-bottom:5px}
+.choice span{font-size:10px;color:var(--muted)}
+.form-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px}
+.sim-layout{grid-template-columns:minmax(0,1.6fr) minmax(260px,.8fr)}
+.sim-stage{
+  background:radial-gradient(ellipse at 50% 55%,#1B302E,#0A111B 68%);
+  border:1px solid var(--line);border-radius:18px;overflow:hidden
+}
+.sim-stage svg{width:100%;display:block}
+.sim-road{fill:#303B49}
+.sim-line{stroke:#D6DECE;stroke-width:2;stroke-dasharray:24 18}
+.bump{fill:#B7F56A;stroke:#E0FFBB;stroke-width:1}
+.wheel{fill:#0B111B;stroke:#8A9DA9;stroke-width:4}
+.wheel-core{fill:#B7F56A}
+.car-body{fill:#9AB8B0;stroke:#D6F6E8;stroke-width:1.4}
+.car-window{fill:#172A36;stroke:#68877F;stroke-width:1}
+.energy-ray{stroke:#B7F56A;stroke-width:2;stroke-dasharray:5 6;opacity:0}
+.sim-stage.running .energy-ray{opacity:1;animation:ray .5s linear infinite}
+.sim-stage.running .car{animation:carPass 3.5s ease-in-out forwards}
+.sim-stage.running .bump{animation:bumpPress .7s 1.15s 2 alternate ease-in-out}
+.sim-stage.running .wheel{animation:wheelSpin 1.3s 1.2s linear}
+@keyframes ray{to{stroke-dashoffset:-22}}
+@keyframes carPass{0%{transform:translateX(-150px)}45%{transform:translateX(100px)}65%{transform:translateX(120px)}100%{transform:translateX(600px)}}
+@keyframes bumpPress{to{transform:translateY(6px)}}
+@keyframes wheelSpin{to{transform:rotate(360deg)}}
+.sim-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:13px}
+.sim-step{padding:12px 8px;background:var(--surface);border:1px solid var(--line);border-radius:10px;text-align:center}
+.sim-step b{display:block;font-size:11px;margin:7px 0 3px}
+.sim-step span{font-size:10px;color:var(--muted)}
+.sim-step.current{border-color:var(--green);background:#18271F}
+.range{width:100%;accent-color:var(--green);margin:12px 0 20px}
+.calc-result{padding:18px;background:#18271F;border-radius:12px;margin-top:16px}
+.solutions{grid-template-columns:repeat(3,minmax(0,1fr))}
+.solution-mark{font-size:25px;color:var(--green);margin-bottom:18px}
+.big-number{font-size:42px;font-weight:850;letter-spacing:-2px}
+.product-row{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:17px 0;border-bottom:1px solid var(--line)}
+.product-row:last-child{border:0}
+.toast{
+  position:fixed;bottom:25px;right:25px;z-index:100;
+  padding:14px 20px;border:1px solid #415C44;border-radius:12px;
+  background:#15251B;color:var(--green);box-shadow:0 10px 40px #0008;
+  max-width:calc(100% - 40px);animation:fade .2s
+}
+.mobile-menu{display:none}
+@media(max-width:1050px){
+  .app-layout{grid-template-columns:190px minmax(0,1fr)}
+  .content{padding:22px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero-art{opacity:.35;width:65%}
+}
+@media(max-width:760px){
+  .onboarding{grid-template-columns:1fr}
+  .onboard-left{min-height:auto;padding:25px}
+  .onboard-title{margin:50px 0 30px}
+  .onboard-title h1{font-size:43px}
+  .onboard-right{padding:25px}
+  .app-layout{grid-template-columns:1fr}
+  .sidebar{border-right:0;border-bottom:1px solid var(--line);padding:8px;display:flex;flex-direction:row;overflow-x:auto}
+  .nav-label,.sidebar-bottom{display:none}
+  .nav-btn{width:auto;white-space:nowrap;padding:10px;font-size:11px}
+  .nav-btn .ico{width:auto}
+  .topbar{height:65px;padding:0 15px}
+  .content{padding:18px}
+  .dashboard-main,.sim-layout{grid-template-columns:1fr}
+  .features,.solutions{grid-template-columns:1fr}
+  .hero-art{width:100%;opacity:.16}
+  .hero{padding:25px}
+  .page-heading{align-items:flex-start}
+  .page-heading .btn{padding:9px;font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;scroll-behavior:auto!important;transition:none!important}
 }
 </style>
 </head>
 <body>
-<div class="layout">
-<aside>
-  <div class="logo">⚡ Speed<span>Bank</span></div>
-  <div class="tagline">TURN TRAFFIC INTO ENERGY</div>
-  <nav>
-    <button class="active" data-page="dashboard">▦ Dashboard</button>
-    <button data-page="how">↗ How It Works</button>
-    <button data-page="impact">◎ Energy & Impact</button>
-    <button data-page="shop">◇ Products & Shop</button>
-    <button data-page="about">ⓘ About Us</button>
-    <button data-page="account">♙ Sign In</button>
-  </nav>
-  <footer>DEMO PROJECT · 2026</footer>
-</aside>
+<div id="app">
 
-<main>
-<header>
-  <div>
-    <h1 id="pageTitle">Energy Dashboard</h1>
-    <div class="muted">Smarter roads. A more sustainable future.</div>
-  </div>
-  <div class="pill">● DEMO MODE</div>
-</header>
-
-<section id="dashboard" class="page active">
-  <div class="grid">
-    <div class="card"><div class="small">ENERGY HARVESTED</div>
-      <div class="metric"><span id="energy">0.024</span> <span class="green">Wh</span></div>
-      <div class="small">Simulated demonstration</div></div>
-    <div class="card"><div class="small">VEHICLE PASSES</div>
-      <div class="metric" id="cars">120</div>
-      <div class="small">Demo counter</div></div>
-    <div class="card"><div class="small">INSTANT POWER</div>
-      <div class="metric"><span id="power">12.0</span> <span class="green">W</span></div>
-      <div class="small">Illustrative peak</div></div>
-    <div class="card"><div class="small">SYSTEM STATUS</div>
-      <div class="metric green" style="font-size:22px">● Online</div>
-      <div class="small">Software simulation only</div></div>
-  </div>
-  <div class="columns">
-    <div class="card">
-      <h2>Energy Production</h2>
-      <p class="muted small">Illustrative hourly output · not measured data</p>
-      <div class="chart" id="chart"></div>
-      <div class="small">06:00　 09:00　 12:00　 15:00　 18:00</div>
+<!-- ONBOARDING -->
+<section id="onboarding" class="onboarding">
+  <div class="onboard-left">
+    <a class="brand" href="#" aria-label="SpeedBank home">
+      <span class="brand-icon">ϟ</span>
+      <span>speedbank<small>INTELLIGENCE IN MOTION</small></span>
+    </a>
+    <div class="onboard-title">
+      <div class="eyebrow">THE NEXT GENERATION OF ROADS</div>
+      <h1>Every journey<br>has <span>potential.</span></h1>
+      <p>Discover a new approach to energy harvesting. Explore how the movement of vehicles could help power the infrastructure of tomorrow.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:25px">
+        <span class="tag"><i class="dot"></i> Energy innovation</span>
+        <span class="tag">Smart infrastructure</span>
+      </div>
     </div>
-    <div class="card">
-      <h2>Live Demonstration</h2>
-      <p class="muted">Simulate a vehicle passing over the energy-harvesting speed bump.</p>
-      <div class="metric green" id="demoEnergy">0.000 Wh</div>
-      <button class="btn" id="pass">＋ Simulate Vehicle Pass</button>
-      <button class="btn secondary" id="reset">Reset Demo</button>
-      <p class="small">Example setting: 0.2 Wh per pass. Replace with measured prototype data.</p>
-    </div>
+    <div class="small muted">STUDENT INNOVATION CONCEPT · 2026</div>
   </div>
-  <div class="notice">Demo data is illustrative. No physical sensor or generator is connected. Actual energy output must be measured.</div>
-</section>
-
-<section id="how" class="page">
-  <div class="card">
-    <h2>How SpeedBank Works</h2>
-    <p class="muted">A concept for harvesting a small amount of energy from road traffic.</p>
-    <div class="grid">
-      <div><div class="metric green">01</div><h3>Vehicle Pressure</h3><p>A vehicle passes over a specially engineered road module.</p></div>
-      <div><div class="metric green">02</div><h3>Mechanical Motion</h3><p>A moving mechanism transfers part of the applied force.</p></div>
-      <div><div class="metric green">03</div><h3>Electricity</h3><p>A generator converts mechanical motion into electrical energy.</p></div>
-      <div><div class="metric green">04</div><h3>Storage</h3><p>Suitable electronics manage and store the harvested energy.</p></div>
-    </div>
-    <h2>Possible Applications</h2>
-    <p>Low-power LEDs, road sensors, counters and educational monitoring systems.</p>
-    <div class="notice">Engineering challenge: the system must be safe, durable, weather-resistant and efficient. Road traffic safety and vehicle comfort come first.</div>
-  </div>
-</section>
-
-<section id="impact" class="page">
-  <div class="columns">
-    <div class="card">
-      <h2>Energy Scenario Calculator</h2>
-      <p class="muted">Explore a hypothetical scenario. These are editable assumptions, not test results.</p>
-      <label>Vehicle passes per day</label>
-      <input type="number" id="traffic" value="1000" min="0">
-      <label>Energy captured per pass (Wh)</label>
-      <input type="number" id="perPass" value="0.2" min="0" step="0.01">
-      <label>Operating days per year</label>
-      <input type="number" id="days" value="365" min="0" max="365">
-      <button class="btn" id="calculate">Calculate Scenario</button>
-    </div>
-    <div class="card">
-      <h2>Estimated Results</h2>
-      <div class="small">DAILY ENERGY</div>
-      <div class="metric green" id="daily">200 Wh</div>
-      <div class="small">ANNUAL ENERGY</div>
-      <div class="metric" id="annual">73 kWh</div>
-      <p class="muted small">Gross theoretical estimate before system losses, downtime and maintenance.</p>
+  <div class="onboard-right">
+    <div class="form-wrap">
+      <div class="eyebrow">YOUR SPEEDBANK EXPERIENCE</div>
+      <h2 id="onTitle" style="font-size:30px;margin:12px 0">Let's get to know you.</h2>
+      <p id="onDesc">Choose the profile that best describes you.</p>
+      <div class="step-dots"><span class="on"></span><span></span><span></span></div>
+      <div id="onStep1">
+        <label>HOW WILL YOU USE SPEEDBANK?</label>
+        <div class="choice-grid" id="roleChoices">
+          <button class="choice selected" data-role="Business" type="button"><b>▣ Business</b><span>Explore a commercial opportunity</span></button>
+          <button class="choice" data-role="City" type="button"><b>⌂ City / Government</b><span>Explore smarter infrastructure</span></button>
+          <button class="choice" data-role="Investor" type="button"><b>↗ Investor / Partner</b><span>Evaluate a future concept</span></button>
+          <button class="choice" data-role="Student" type="button"><b>⌘ Student / Researcher</b><span>Learn about the technology</span></button>
+        </div>
+        <button class="btn full" id="stepNext">Personalize my experience →</button>
+      </div>
+      <div id="onStep2" class="hidden">
+        <label for="city">CITY OR REGION</label>
+        <input id="city" class="input" placeholder="e.g. Santa Cruz de la Sierra">
+        <label for="locationType">WHERE WOULD YOU USE THE SYSTEM?</label>
+        <select id="locationType" class="input">
+          <option>Urban roads</option><option>Parking facilities</option>
+          <option>Private roads or campuses</option><option>Highways and major roads</option>
+        </select>
+        <label for="objective">YOUR MAIN OBJECTIVE</label>
+        <select id="objective" class="input">
+          <option>Explore energy generation</option>
+          <option>Improve urban infrastructure</option>
+          <option>Evaluate a business opportunity</option>
+          <option>Research and education</option>
+        </select>
+        <div class="form-foot">
+          <button class="btn ghost" id="stepBack">← Back</button>
+          <button class="btn" id="stepFinish">Build my workspace →</button>
+        </div>
+        <p class="small muted" style="margin-top:15px">This is a local demo. No information is sent to a server.</p>
+      </div>
+      <div id="onStep3" class="hidden">
+        <h2>Your workspace is ready.</h2>
+        <p>Explore your personalized SpeedBank experience. You can use the demo without creating an online account.</p>
+        <label for="displayName">DISPLAY NAME (OPTIONAL)</label>
+        <input class="input" id="displayName" placeholder="Your name or organization">
+        <button class="btn full" id="enterApp">Enter SpeedBank ↗</button>
+        <p class="small muted" style="margin-top:12px">Demo profile only. This does not create a secure account.</p>
+      </div>
     </div>
   </div>
-  <div class="notice">Environmental benefits depend on measured output and the electricity source being displaced. Energy harvesting is not automatically carbon-neutral.</div>
 </section>
 
-<section id="shop" class="page">
-  <div class="card product">
-    <h2>01 · Educational Prototype</h2>
-    <div class="metric green">School Project</div>
-    <p class="muted">A small demonstration model with a moving plate, spring, generator and LED indicator.</p>
-    <button class="btn secondary" data-info="prototype">View Components</button>
-  </div>
-  <div class="card product">
-    <h2>02 · Energy Monitoring Kit</h2>
-    <div class="metric green">Concept Product</div>
-    <p class="muted">Voltage and current measurement, a microcontroller and a simple monitoring display.</p>
-    <button class="btn secondary" data-info="monitor">View Components</button>
-  </div>
-  <div class="card product">
-    <h2>03 · Smart Road System</h2>
-    <div class="metric green">Future Concept</div>
-    <p class="muted">A proposed modular system for controlled testing and low-power road infrastructure.</p>
-    <button class="btn secondary" data-info="road">View Concept</button>
-  </div>
-  <div id="productInfo" class="notice">Product concepts only. No items are currently for sale.</div>
-</section>
+<!-- APPLICATION -->
+<section id="workspace" class="hidden">
+  <header class="topbar">
+    <a class="brand" href="#" onclick="return false">
+      <span class="brand-icon">ϟ</span><span>speedbank<small>ENERGY INTELLIGENCE</small></span>
+    </a>
+    <div class="top-actions">
+      <span class="tag"><i class="dot"></i> Concept environment</span>
+      <div class="avatar" id="userAvatar">SB</div>
+    </div>
+  </header>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="nav-label">WORKSPACE</div>
+      <button class="nav-btn active" data-page="overview"><span class="ico">▦</span>Overview</button>
+      <button class="nav-btn" data-page="simulator"><span class="ico">▷</span>Live Simulator</button>
+      <button class="nav-btn" data-page="analytics"><span class="ico">⌁</span>Energy Analytics</button>
+      <div class="nav-label">DISCOVER</div>
+      <button class="nav-btn" data-page="technology"><span class="ico">ϟ</span>How It Works</button>
+      <button class="nav-btn" data-page="solutions"><span class="ico">⌂</span>Solutions</button>
+      <button class="nav-btn" data-page="business"><span class="ico">↗</span>Business Model</button>
+      <button class="nav-btn" data-page="about"><span class="ico">ⓘ</span>About SpeedBank</button>
+      <div class="sidebar-bottom">
+        <div class="small muted">DEMONSTRATION BUILD</div>
+        <div class="small green">Version 1.0 · 2026</div>
+        <button class="nav-btn" id="editProfile" style="margin-top:12px">⚙ Edit profile</button>
+      </div>
+    </aside>
+    <main class="content">
 
-<section id="about" class="page">
-  <div class="card">
-    <h2>Our Mission</h2>
-    <p>SpeedBank explores how everyday movement could contribute to small-scale energy generation. We want to encourage innovation, sustainability and smarter infrastructure.</p>
-    <h2>Our Vision</h2>
-    <p>To investigate practical ways of recovering otherwise unused mechanical energy and applying it to useful low-power devices.</p>
-    <h2>Why SpeedBank?</h2>
-    <p>Our project connects science, engineering, environmental awareness and business thinking in one demonstrable concept.</p>
-    <div class="notice">Our next milestone: build a safe prototype, measure its electrical output and compare results with our simulations.</div>
+      <!-- OVERVIEW -->
+      <section class="page active" id="page-overview">
+        <div class="page-heading">
+          <div><div class="eyebrow">INTELLIGENCE OVERVIEW</div><h1 id="welcomeTitle">Good to have you here.</h1><p>Your overview of the SpeedBank energy concept.</p></div>
+          <button class="btn" onclick="showPage('simulator')">▷ Run simulation</button>
+        </div>
+        <div class="hero">
+          <div class="hero-copy">
+            <div class="eyebrow">ENERGY FROM EVERYDAY MOTION</div>
+            <h1>Smarter roads.<br><span>New possibilities.</span></h1>
+            <p>We are exploring how specially engineered speed bumps could recover a portion of vehicle motion and convert it into useful electricity.</p>
+            <div class="hero-actions">
+              <button class="btn" onclick="showPage('simulator')">Explore the technology ↗</button>
+              <button class="btn ghost" onclick="showPage('business')">Business opportunity</button>
+            </div>
+          </div>
+          <svg class="hero-art" viewBox="0 0 500 340" fill="none" aria-hidden="true">
+            <circle cx="300" cy="170" r="125" stroke="#B7F56A" stroke-opacity=".17"/>
+            <circle cx="300" cy="170" r="95" stroke="#B7F56A" stroke-opacity=".20" stroke-dasharray="4 10"/>
+            <circle cx="300" cy="170" r="63" stroke="#B7F56A" stroke-opacity=".3"/>
+            <path d="M130 220 L185 220 L205 198 L330 198 L357 220 L402 220" stroke="#B7F56A" stroke-width="2"/>
+            <path d="M170 192 L193 153 Q198 145 212 145 L315 145 Q328 145 340 162 L360 192Z" fill="#9BB7A5" fill-opacity=".9"/>
+            <path d="M208 151 L301 151 Q314 151 325 169 L216 169Z" fill="#152A32"/>
+            <circle cx="209" cy="196" r="20" fill="#0A111A" stroke="#B7F56A" stroke-width="3"/>
+            <circle cx="209" cy="196" r="7" fill="#B7F56A"/>
+            <circle cx="334" cy="196" r="20" fill="#0A111A" stroke="#B7F56A" stroke-width="3"/>
+            <circle cx="334" cy="196" r="7" fill="#B7F56A"/>
+            <path d="M110 236 H430" stroke="#536A60" stroke-dasharray="6 8"/>
+            <path d="M265 240 L265 263 M300 240 L300 263 M335 240 L335 263" stroke="#B7F56A" stroke-width="3"/>
+            <path d="M253 267 L265 281 L277 267 M288 267 L300 281 L312 267 M323 267 L335 281 L347 267" stroke="#B7F56A" stroke-width="2"/>
+            <text x="300" y="310" text-anchor="middle" fill="#B7F56A" font-size="11" letter-spacing="3">MOTION → ENERGY</text>
+          </svg>
+        </div>
+        <div class="grid stats">
+          <div class="card"><div class="stat-icon">ϟ</div><div class="metric-label">SIMULATED ENERGY</div><div class="metric"><span id="statEnergy">0.00</span> <span class="green" style="font-size:15px">Wh</span></div><div class="delta">Demo counter</div></div>
+          <div class="card"><div class="stat-icon">↗</div><div class="metric-label">VEHICLE PASSES</div><div class="metric" id="statPasses">0</div><div class="delta">In this session</div></div>
+          <div class="card"><div class="stat-icon">⌁</div><div class="metric-label">PEAK POWER ASSUMPTION</div><div class="metric"><span id="statPower">0</span> <span class="green" style="font-size:15px">W</span></div><div class="delta">Editable model input</div></div>
+          <div class="card"><div class="stat-icon">◎</div><div class="metric-label">SYSTEM MODE</div><div class="metric" style="font-size:23px">Concept</div><div class="delta">No live sensor connected</div></div>
+        </div>
+        <div class="grid dashboard-main">
+          <div class="card">
+            <div class="card-head"><div><h2>Energy output</h2><div class="small muted">Illustrative production profile</div></div><span class="tag">DEMO DATA</span></div>
+            <svg class="chart" id="overviewChart" viewBox="0 0 620 210" preserveAspectRatio="none" role="img" aria-label="Illustrative energy output chart"></svg>
+            <div class="small muted">Hourly values are illustrative, not sensor readings.</div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>Recent activity</h2><span class="green small">SESSION</span></div>
+            <div id="activityList"><div class="activity"><div class="activity-icon">ϟ</div><div class="activity-copy"><strong>Workspace initialized</strong><span>Demo environment ready</span></div><div class="activity-value green">Ready</div></div></div>
+            <button class="btn ghost full" style="margin-top:12px" onclick="showPage('simulator')">Open simulator →</button>
+          </div>
+        </div>
+        <div class="section-title"><h2>Explore SpeedBank</h2><span class="small muted">YOUR WORKSPACE</span></div>
+        <div class="grid features">
+          <div class="card feature"><div class="feature-icon">▷</div><h3>Interactive simulator</h3><p>See a vehicle cross the module and explore the energy conversion sequence.</p><button class="btn ghost small" style="margin-top:18px" onclick="showPage('simulator')">Launch simulator →</button></div>
+          <div class="card feature"><div class="feature-icon">⌁</div><h3>Energy analytics</h3><p>Adjust traffic, energy per pass and operating days to explore possible scenarios.</p><button class="btn ghost small" style="margin-top:18px" onclick="showPage('analytics')">Explore data →</button></div>
+          <div class="card feature"><div class="feature-icon">↗</div><h3>Business model</h3><p>Discover a potential product strategy, customers, costs and next steps.</p><button class="btn ghost small" style="margin-top:18px" onclick="showPage('business')">View strategy →</button></div>
+        </div>
+      </section>
+
+      <!-- SIMULATOR -->
+      <section class="page" id="page-simulator">
+        <div class="page-heading"><div><div class="eyebrow">INTERACTIVE ENGINEERING LAB</div><h1>Live Simulator</h1><p>Explore the conceptual sequence from vehicle pressure to stored energy.</p></div><span class="tag"><i class="dot"></i> Visual simulation</span></div>
+        <div class="grid sim-layout">
+          <div>
+            <div class="sim-stage" id="simStage">
+              <svg viewBox="0 0 700 340" role="img" aria-label="Animated car passing over an energy harvesting speed bump">
+                <defs>
+                  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#152C32"/><stop offset="1" stop-color="#101925"/></linearGradient>
+                </defs>
+                <rect width="700" height="340" fill="url(#sky)"/>
+                <circle cx="560" cy="60" r="34" fill="#B7F56A" opacity=".08"/>
+                <path d="M0 192 L700 192 L700 260 L0 260Z" fill="#192431"/>
+                <path d="M0 260 H700 V340 H0Z" class="sim-road"/>
+                <path d="M0 302 H700" class="sim-line"/>
+                <g opacity=".35" stroke="#B7F56A" fill="none"><path d="M90 225 V250 M83 243 L90 250 L97 243"/><path d="M140 225 V250 M133 243 L140 250 L147 243"/></g>
+                <g id="car" class="car" transform="translate(-150 0)">
+                  <path class="car-body" d="M12 206 L35 170 Q43 157 65 157 H132 Q151 157 165 180 L185 206 L194 212 V231 H5 V214Z"/>
+                  <path class="car-window" d="M48 174 Q54 165 68 165 H94 V190 H38Z"/>
+                  <path class="car-window" d="M103 165 H130 Q143 165 153 188 H103Z"/>
+                  <rect x="12" y="203" width="181" height="8" rx="3" fill="#C5E0D2"/>
+                  <circle class="wheel" cx="48" cy="227" r="19"/>
+                  <circle class="wheel-core" cx="48" cy="227" r="6"/>
+                  <circle class="wheel" cx="151" cy="227" r="19"/>
+                  <circle class="wheel-core" cx="151" cy="227" r="6"/>
+                </g>
+                <path d="M285 258 H420" stroke="#B7F56A" stroke-width="2" stroke-dasharray="5 6" opacity=".6"/>
+                <g id="bumpAssembly">
+                  <rect x="300" y="245" width="110" height="14" rx="3" fill="#374A47" stroke="#B7F56A"/>
+                  <path d="M310 245 L322 225 L334 245 L346 225 L358 245 L370 225 L382 245 L394 225 L405 245" fill="#B7F56A" stroke="#DFFFBC" stroke-width="1.5"/>
+                  <rect x="315" y="263" width="80" height="22" rx="4" fill="#263B39" stroke="#60796A"/>
+                  <path d="M328 264 V282 M343 264 V282 M358 264 V282 M373 264 V282" stroke="#B7F56A" stroke-width="2"/>
+                </g>
+                <g id="generator" transform="translate(355 306)">
+                  <circle r="17" fill="#142720" stroke="#B7F56A" stroke-width="2"/>
+                  <path d="M0 -10 V10 M-10 0 H10 M-7 -7 L7 7 M7 -7 L-7 7" stroke="#B7F56A" stroke-width="1.5"/>
+                </g>
+                <path class="energy-ray" d="M355 287 V285 M355 287 L355 288"/>
+                <path d="M380 306 H460" stroke="#B7F56A" stroke-width="2" stroke-dasharray="4 5"/>
+                <rect x="465" y="288" width="100" height="36" rx="7" fill="#192E25" stroke="#B7F56A"/>
+                <rect x="473" y="296" width="8" height="20" rx="2" fill="#B7F56A"/>
+                <rect x="487" y="296" width="8" height="20" rx="2" fill="#B7F56A" opacity=".7"/>
+                <rect x="501" y="296" width="8" height="20" rx="2" fill="#B7F56A" opacity=".4"/>
+                <text x="515" y="283" fill="#B7F56A" font-size="10" text-anchor="middle">STORAGE CONCEPT</text>
+                <text x="350" y="30" fill="#B7F56A" font-size="10" text-anchor="middle" letter-spacing="3">MECHANICAL ENERGY HARVESTING</text>
+                <text x="350" y="55" fill="#DCE6E7" font-size="12" text-anchor="middle" id="simStatusSvg">READY TO SIMULATE</text>
+              </svg>
+            </div>
+            <div class="sim-steps">
+              <div class="sim-step current" id="simStep1"><div class="green">01</div><b>Vehicle</b><span>Movement</span></div>
+              <div class="sim-step" id="simStep2"><div class="green">02</div><b>Pressure</b><span>Compression</span></div>
+              <div class="sim-step" id="simStep3"><div class="green">03</div><b>Generator</b><span>Conversion</span></div>
+              <div class="sim-step" id="simStep4"><div class="green">04</div><b>Storage</b><span>Conditioning</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="eyebrow">SIMULATION CONTROLS</div>
+            <h2 style="margin-top:12px">Run a vehicle pass</h2>
+            <p class="small">Play the conceptual animation and add one assumed energy event to the demo counter.</p>
+            <label for="simPerPass">ASSUMED ENERGY PER PASS (Wh)</label>
+            <input class="input" id="simPerPass" type="number" min="0" max="10000" step=".01" value="0.20">
+            <button class="btn full" id="runSim">▷ Start simulation</button>
+            <button class="btn ghost full" style="margin-top:10px" id="resetSim">Reset animation</button>
+            <hr>
+            <div class="metric-label">SESSION ENERGY</div>
+            <div class="metric green"><span id="simEnergy">0.00</span> Wh</div>
+            <div class="metric-label" style="margin-top:15px">VEHICLE PASSES</div>
+            <div class="metric" id="simPasses">0</div>
+            <div class="notice" style="font-size:11px;color:#C8D7CD;border-left:2px solid var(--green);padding:12px;background:#15251F;margin-top:20px">Illustrative animation only. The moving mechanism, electrical output and battery are not physically connected to this software.</div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:18px"><h2>Engineering sequence</h2><p id="simExplanation">Select Start simulation to explore the sequence.</p></div>
+      </section>
+
+      <!-- ANALYTICS -->
+      <section class="page" id="page-analytics">
+        <div class="page-heading"><div><div class="eyebrow">SCENARIO PLANNING</div><h1>Energy Analytics</h1><p>Test assumptions and compare potential production scenarios.</p></div><span class="tag">MODEL ESTIMATES</span></div>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+          <div class="card">
+            <div class="eyebrow">MODEL INPUTS</div><h2 style="margin-top:12px">Your scenario</h2>
+            <label for="traffic">VEHICLE PASSES PER DAY</label><input class="input" id="traffic" type="number" min="0" max="100000000" value="1000">
+            <label for="energyPass">ENERGY CAPTURED PER PASS (Wh)</label><input class="input" id="energyPass" type="number" min="0" max="1000000" step=".01" value=".20">
+            <label for="efficiency">OVERALL SYSTEM EFFICIENCY (%)</label><input class="input" id="efficiency" type="number" min="0" max="100" value="60">
+            <label for="days">OPERATING DAYS PER YEAR</label><input class="input" id="days" type="number" min="0" max="366" value="365">
+            <label for="systems">NUMBER OF MODULES</label><input class="input" id="systems" type="number" min="1" max="1000000" value="1">
+            <button class="btn full" id="calculate">Calculate scenario ↗</button>
+          </div>
+          <div class="card">
+            <div class="eyebrow">ESTIMATED OUTPUT</div><h2 style="margin-top:12px">Production summary</h2>
+            <div class="metric-label" style="margin-top:22px">DAILY ENERGY</div><div class="metric green"><span id="dailyWh">120</span> Wh</div>
+            <hr>
+            <div class="metric-label">ANNUAL ENERGY</div><div class="metric"><span id="annualKwh">43.8</span> kWh</div>
+            <hr>
+            <div class="metric-label">AVERAGE POWER OVER 24 HOURS</div><div class="metric"><span id="avgPower">5</span> W</div>
+            <div class="calc-result"><div class="small muted">MODEL STATUS</div><strong id="calcStatus">Illustrative scenario</strong><p class="small" style="margin:8px 0 0">Results are estimates, not measured output or guaranteed performance.</p></div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:18px">
+          <div class="card-head"><h2>Energy production profile</h2><span class="tag">ILLUSTRATIVE</span></div>
+          <svg class="chart" id="analyticsChart" viewBox="0 0 620 210" preserveAspectRatio="none" role="img" aria-label="Illustrative daily energy profile"></svg>
+          <p class="small muted">The profile illustrates a hypothetical distribution of traffic. It does not represent a field study.</p>
+        </div>
+      </section>
+
+      <!-- TECHNOLOGY -->
+      <section class="page" id="page-technology">
+        <div class="page-heading"><div><div class="eyebrow">THE TECHNOLOGY</div><h1>How it works</h1><p>Recovering a portion of mechanical motion requires a carefully engineered system.</p></div></div>
+        <div class="grid features">
+          <div class="card feature"><div class="feature-icon">01</div><h3>Vehicle pressure</h3><p>A wheel applies a load to a specially engineered movable module designed for safe passage.</p></div>
+          <div class="card feature"><div class="feature-icon">02</div><h3>Mechanical transfer</h3><p>A guided mechanism transfers some of the movement to a generator. Springs and gearing are possible design elements.</p></div>
+          <div class="card feature"><div class="feature-icon">03</div><h3>Electrical conversion</h3><p>A generator converts mechanical input into electrical output. Voltage and current must be measured.</p></div>
+          <div class="card feature"><div class="feature-icon">04</div><h3>Power conditioning</h3><p>Suitable electronics regulate the output to protect connected components and manage varying voltage.</p></div>
+          <div class="card feature"><div class="feature-icon">05</div><h3>Energy storage</h3><p>A properly designed storage system can collect energy for later low-power use.</p></div>
+          <div class="card feature"><div class="feature-icon">06</div><h3>Monitoring</h3><p>Sensors can record voltage, current, energy, temperature and system performance.</p></div>
+        </div>
+        <div class="card" style="margin-top:18px">
+          <h2>What should we measure?</h2>
+          <p>To turn this concept into an evidence-based project, measure the prototype's voltage and current under repeatable conditions, and integrate power over time to estimate electrical energy.</p>
+          <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-top:20px">
+            <div><div class="eyebrow">VOLTAGE</div><div class="metric">V</div><p class="small">Electrical potential difference.</p></div>
+            <div><div class="eyebrow">CURRENT</div><div class="metric">A</div><p class="small">Electric charge flow per second.</p></div>
+            <div><div class="eyebrow">POWER</div><div class="metric">W</div><p class="small">Instantaneous electrical power: P = V × I for DC.</p></div>
+            <div><div class="eyebrow">ENERGY</div><div class="metric">Wh</div><p class="small">Power accumulated over a period of time.</p></div>
+          </div>
+        </div>
+        <div class="notice">A real roadway product would require professional structural, electrical, accessibility and road-safety testing. This school concept is not a certified road device.</div>
+      </section>
+
+      <!-- SOLUTIONS -->
+      <section class="page" id="page-solutions">
+        <div class="page-heading"><div><div class="eyebrow">POTENTIAL APPLICATIONS</div><h1>Solutions for smarter places</h1><p>Start with low-power applications and evaluate feasibility using measured energy output.</p></div></div>
+        <div class="grid solutions">
+          <div class="card"><div class="solution-mark">⌂</div><h2>Smart cities</h2><p>Explore whether recovered energy could support selected low-power roadside sensors or counters.</p><span class="tag">Urban infrastructure</span></div>
+          <div class="card"><div class="solution-mark">▦</div><h2>Parking facilities</h2><p>Controlled locations could provide a setting to study traffic movement, sensor power needs and maintenance.</p><span class="tag">Controlled environment</span></div>
+          <div class="card"><div class="solution-mark">⌘</div><h2>Campuses</h2><p>Educational facilities can use demonstration modules to teach energy conversion and instrumentation.</p><span class="tag">Education & research</span></div>
+        </div>
+        <div class="card" style="margin-top:20px">
+          <h2>Choose the right first application</h2>
+          <p>Our proposed first step is a controlled, low-force prototype rather than a public road installation.</p>
+          <button class="btn" onclick="showPage('simulator')">Explore the prototype simulation →</button>
+        </div>
+      </section>
+
+      <!-- BUSINESS -->
+      <section class="page" id="page-business">
+        <div class="page-heading"><div><div class="eyebrow">BUSINESS STRATEGY</div><h1>From concept to opportunity</h1><p>A preliminary business model to test with engineering and market research.</p></div></div>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+          <div class="card"><div class="eyebrow">01 / CUSTOMERS</div><h2 style="margin-top:15px">Who might use it?</h2><p>Municipalities, parking operators, private campuses and research institutions could be potential customer groups to investigate.</p></div>
+          <div class="card"><div class="eyebrow">02 / VALUE</div><h2 style="margin-top:15px">What do we offer?</h2><p>A monitored energy-harvesting concept, prototype data and a possible low-power infrastructure application.</p></div>
+          <div class="card"><div class="eyebrow">03 / REVENUE</div><h2 style="margin-top:15px">How could it earn?</h2><p>Potential models include equipment sales, installation, monitoring and maintenance, subject to validation.</p></div>
+        </div>
+        <div class="card" style="margin-top:18px">
+          <div class="card-head"><h2>Prototype bill of materials</h2><span class="tag">RESEARCH REQUIRED</span></div>
+          <div class="product-row"><div><strong>Moving plate and guide</strong><div class="small muted">Small tabletop mechanical structure</div></div><span class="green">Price TBD</span></div>
+          <div class="product-row"><div><strong>Springs and mechanical parts</strong><div class="small muted">Selected for controlled low-force movement</div></div><span class="green">Price TBD</span></div>
+          <div class="product-row"><div><strong>Small DC motor / generator</strong><div class="small muted">Used as a generator in a low-voltage demo</div></div><span class="green">Price TBD</span></div>
+          <div class="product-row"><div><strong>Multimeter and LED</strong><div class="small muted">Basic output measurement and demonstration</div></div><span class="green">Price TBD</span></div>
+          <div class="product-row"><div><strong>Wiring and safe enclosure</strong><div class="small muted">Insulation, mounting and protection</div></div><span class="green">Price TBD</span></div>
+          <p class="small muted" style="margin-top:18px">No products are currently for sale. Obtain local supplier quotes before calculating the project budget.</p>
+        </div>
+        <div class="card" style="margin-top:18px">
+          <h2>Our validation roadmap</h2>
+          <div class="activity"><div class="activity-icon">01</div><div class="activity-copy"><strong>Build a safe tabletop prototype</strong><span>Demonstrate mechanical movement.</span></div></div>
+          <div class="activity"><div class="activity-icon">02</div><div class="activity-copy"><strong>Measure real electrical output</strong><span>Record voltage, current and energy.</span></div></div>
+          <div class="activity"><div class="activity-icon">03</div><div class="activity-copy"><strong>Estimate full system costs</strong><span>Include fabrication, electronics, maintenance and losses.</span></div></div>
+          <div class="activity"><div class="activity-icon">04</div><div class="activity-copy"><strong>Test practical use cases</strong><span>Compare measured energy with actual device demand.</span></div></div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="page" id="page-about">
+        <div class="hero"><div class="hero-copy"><div class="eyebrow">OUR MISSION</div><h1>Innovation in<br><span>every movement.</span></h1><p>SpeedBank is a student innovation concept exploring the intersection of mechanical engineering, renewable-energy research and intelligent infrastructure.</p></div></div>
+        <div class="grid features">
+          <div class="card feature"><div class="feature-icon">◎</div><h3>Our vision</h3><p>Investigate whether everyday vehicle movement can contribute to useful low-power applications.</p></div>
+          <div class="card feature"><div class="feature-icon">⌘</div><h3>Our approach</h3><p>Build, measure, calculate and improve. Evidence should guide every design decision.</p></div>
+          <div class="card feature"><div class="feature-icon">ϟ</div><h3>Our commitment</h3><p>Put safety, transparent data and responsible engineering ahead of unsupported promises.</p></div>
+        </div>
+        <div class="card" style="margin-top:18px"><h2>Get in touch</h2><p>For the school fair, this demonstration can introduce the concept and its future research questions.</p><button class="btn" id="contactBtn">Prepare an inquiry ↗</button><p class="small muted" style="margin-top:15px">Demo only. No message is sent from this website.</p></div>
+      </section>
+
+    </main>
   </div>
 </section>
-
-<section id="account" class="page">
-  <div class="card" style="max-width:460px;margin:auto">
-    <h2 id="authTitle">Welcome Back</h2>
-    <p class="muted">Access your SpeedBank demonstration dashboard.</p>
-    <label>Email address</label>
-    <input type="email" id="email" placeholder="student@example.com">
-    <label>Password</label>
-    <input type="password" id="password" placeholder="Enter any demo password">
-    <button class="btn" id="login">Sign In</button>
-    <button class="btn secondary" id="logout" style="display:none">Sign Out</button>
-    <p class="small" id="authMessage">School demo only. Do not enter a real password.</p>
-  </div>
-</section>
-
-<footer>SpeedBank Student Innovation Project · Concept and simulated data · 2026</footer>
-</main>
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 </div>
-
 <script>
-const titles = {
-  dashboard:"Energy Dashboard",
-  how:"How It Works",
-  impact:"Energy & Impact",
-  shop:"Products & Shop",
-  about:"About SpeedBank",
-  account:"Your Account"
-};
+(() => {
+"use strict";
 
-document.querySelectorAll("nav button").forEach(button => {
-  button.addEventListener("click", () => {
-    document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    button.classList.add("active");
-    document.getElementById(button.dataset.page).classList.add("active");
-    document.getElementById("pageTitle").textContent = titles[button.dataset.page];
+const $ = id => document.getElementById(id);
+const state = {
+  role:"Business", city:"", location:"Urban roads", objective:"Explore energy generation",
+  name:"", passes:0, energy:0, peakPower:0, simRunning:false
+};
+let toastTimer;
+
+function notify(message){
+  $("toast").textContent=message;
+  $("toast").classList.remove("hidden");
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>$("toast").classList.add("hidden"),3000);
+}
+function showPage(name){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".nav-btn[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===name));
+  const page=$("page-"+name);
+  if(!page)return;
+  page.classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+  if(name==="analytics")calculateScenario();
+}
+window.showPage=showPage;
+
+function setStep(n){
+  ["onStep1","onStep2","onStep3"].forEach((id,i)=>$(id).classList.toggle("hidden",i!==n-1));
+  const titles=["Let's get to know you.","Customize your workspace.","Your experience is ready."];
+  const desc=["Choose the profile that best describes you.","Tell us where and how you would explore SpeedBank.","Enter the demonstration workspace."];
+  $("onTitle").textContent=titles[n-1];
+  $("onDesc").textContent=desc[n-1];
+  document.querySelectorAll(".step-dots span").forEach((el,i)=>el.classList.toggle("on",i<n));
+}
+document.querySelectorAll("[data-role]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    state.role=btn.dataset.role;
+    document.querySelectorAll("[data-role]").forEach(b=>b.classList.toggle("selected",b===btn));
   });
 });
+$("stepNext").addEventListener("click",()=>setStep(2));
+$("stepBack").addEventListener("click",()=>setStep(1));
+$("stepFinish").addEventListener("click",()=>{
+  state.city=$("city").value.trim();
+  state.location=$("locationType").value;
+  state.objective=$("objective").value;
+  setStep(3);
+});
+$("enterApp").addEventListener("click",()=>{
+  state.name=$("displayName").value.trim();
+  $("onboarding").classList.add("hidden");
+  $("workspace").classList.remove("hidden");
+  $("userAvatar").textContent=(state.name||state.role).slice(0,2).toUpperCase();
+  $("welcomeTitle").textContent=state.name?"Welcome, "+state.name+".":"Welcome to your workspace.";
+  updateMetrics();
+  drawChart("overviewChart",[3,5,4,8,6,12,9,15,12,18,14,21]);
+  showPage("overview");
+});
+$("editProfile").addEventListener("click",()=>{
+  $("workspace").classList.add("hidden");
+  $("onboarding").classList.remove("hidden");
+  setStep(2);
+});
 
-let passes = 0;
-let energy = 0;
-const energyPerPass = 0.2;
+document.querySelectorAll(".nav-btn[data-page]").forEach(btn=>btn.addEventListener("click",()=>showPage(btn.dataset.page)));
 
-function updateDemo() {
-  document.getElementById("cars").textContent = 120 + passes;
-  document.getElementById("demoEnergy").textContent = energy.toFixed(2) + " Wh";
-  document.getElementById("energy").textContent = (0.024 + energy).toFixed(3);
-  document.getElementById("power").textContent = passes ? "12.0" : "0.0";
+function updateMetrics(){
+  $("statEnergy").textContent=state.energy.toFixed(2);
+  $("statPasses").textContent=state.passes.toLocaleString();
+  $("statPower").textContent=state.peakPower.toFixed(1);
+  $("simEnergy").textContent=state.energy.toFixed(2);
+  $("simPasses").textContent=state.passes.toLocaleString();
 }
-document.getElementById("pass").addEventListener("click", () => {
-  passes++;
-  energy += energyPerPass;
-  updateDemo();
-});
-document.getElementById("reset").addEventListener("click", () => {
-  passes = 0;
-  energy = 0;
-  updateDemo();
-});
-
-function calculate() {
-  const traffic = Math.max(0, Number(document.getElementById("traffic").value) || 0);
-  const perPass = Math.max(0, Number(document.getElementById("perPass").value) || 0);
-  const days = Math.min(365, Math.max(0, Number(document.getElementById("days").value) || 0));
-  const dailyWh = traffic * perPass;
-  document.getElementById("daily").textContent = dailyWh.toLocaleString(undefined,{maximumFractionDigits:2}) + " Wh";
-  document.getElementById("annual").textContent = (dailyWh * days / 1000).toLocaleString(undefined,{maximumFractionDigits:2}) + " kWh";
+function addActivity(title,subtitle,value){
+  const item=document.createElement("div");
+  item.className="activity";
+  const icon=document.createElement("div");
+  icon.className="activity-icon";icon.textContent="ϟ";
+  const copy=document.createElement("div");copy.className="activity-copy";
+  const strong=document.createElement("strong");strong.textContent=title;
+  const span=document.createElement("span");span.textContent=subtitle;
+  copy.append(strong,span);
+  const val=document.createElement("div");val.className="activity-value green";val.textContent=value;
+  item.append(icon,copy,val);
+  $("activityList").prepend(item);
+  while($("activityList").children.length>5)$("activityList").lastElementChild.remove();
 }
-document.getElementById("calculate").addEventListener("click", calculate);
-
-const bars = [25,38,32,55,46,75,58,90,65,43,35,22];
-document.getElementById("chart").innerHTML = bars.map((h,i) =>
-  `<div class="bar" title="Illustrative value ${h}" style="height:${h}%"></div>`
-).join("");
-
-const products = {
-  prototype:"Suggested research list: springs, a guided moving plate, a small DC motor used as a generator, wires, an LED and a multimeter. Build only a safe, low-force tabletop model with adult supervision.",
-  monitor:"Suggested research list: voltage/current sensor, microcontroller, display and a suitable protected low-voltage circuit. Check component ratings before connecting anything.",
-  road:"Future concept only. A real road installation requires qualified engineering, structural testing, weather protection and road-safety approval."
-};
-document.querySelectorAll("[data-info]").forEach(button => {
-  button.addEventListener("click", () => {
-    document.getElementById("productInfo").textContent = products[button.dataset.info];
-  });
-});
-
-let signedIn = false;
-document.getElementById("login").addEventListener("click", () => {
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-  const message = document.getElementById("authMessage");
-  if (!email.includes("@") || password.length < 1) {
-    message.textContent = "Enter a valid demo email and any non-empty demo password.";
-    return;
+function drawChart(id,values){
+  const svg=$(id),w=620,h=210,left=38,right=8,top=12,bottom=28;
+  const pw=w-left-right,ph=h-top-bottom;
+  const max=Math.max(1,...values)*1.15;
+  const pts=values.map((v,i)=>[left+i*pw/Math.max(1,values.length-1),top+ph-v/max*ph]);
+  const path=pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ");
+  const area=path+` L ${pts[pts.length-1][0]} ${top+ph} L ${left} ${top+ph} Z`;
+  const labels=["00:00","04:00","08:00","12:00","16:00","20:00"];
+  svg.innerHTML="";
+  const ns="http://www.w3.org/2000/svg";
+  function el(tag,attrs,text){
+    const n=document.createElementNS(ns,tag);
+    Object.entries(attrs||{}).forEach(([k,v])=>n.setAttribute(k,v));
+    if(text!==undefined)n.textContent=text;
+    svg.appendChild(n);return n;
   }
-  signedIn = true;
-  message.textContent = "Demo sign-in successful. This is not a secure real account.";
-  document.getElementById("authTitle").textContent = "Welcome to SpeedBank";
-  document.getElementById("login").style.display = "none";
-  document.getElementById("logout").style.display = "inline-block";
+  const defs=el("defs");
+  const grad=document.createElementNS(ns,"linearGradient");
+  grad.setAttribute("id","chartFill");grad.setAttribute("x1","0");grad.setAttribute("y1","0");grad.setAttribute("x2","0");grad.setAttribute("y2","1");
+  [["0%","#B7F56A","0.23"],["100%","#B7F56A","0"]].forEach(([offset,color,opacity])=>{
+    const s=document.createElementNS(ns,"stop");s.setAttribute("offset",offset);s.setAttribute("stop-color",color);s.setAttribute("stop-opacity",opacity);grad.appendChild(s);
+  });
+  defs.appendChild(grad);
+  for(let i=0;i<4;i++){
+    const y=top+i*ph/3;
+    el("line",{x1:left,y1:y,x2:w-right,y2:y,class:"chart-grid"});
+  }
+  el("path",{d:area,class:"chart-area"});
+  el("path",{d:path,class:"chart-line"});
+  labels.forEach((lab,i)=>el("text",{x:left+i*pw/(labels.length-1),y:h-6,"text-anchor":"middle"},lab));
+  const last=pts[pts.length-1];
+  el("circle",{cx:last[0],cy:last[1],r:4,fill:"#B7F56A",stroke:"#080D16","stroke-width":2});
+}
+
+let simTimeouts=[];
+function clearSimTimers(){simTimeouts.forEach(clearTimeout);simTimeouts=[]}
+function resetAnimation(){
+  clearSimTimers();
+  state.simRunning=false;
+  $("simStage").classList.remove("running");
+  $("car").style.transform="translateX(-150px)";
+  $("simStatusSvg").textContent="READY TO SIMULATE";
+  for(let i=1;i<=4;i++)$("simStep"+i).classList.toggle("current",i===1);
+  $("simExplanation").textContent="Select Start simulation to explore the sequence.";
+  $("runSim").disabled=false;$("runSim").textContent="▷ Start simulation";
+}
+$("resetSim").addEventListener("click",resetAnimation);
+$("runSim").addEventListener("click",()=>{
+  if(state.simRunning)return;
+  const val=Number($("simPerPass").value);
+  if(!Number.isFinite(val)||val<0||val>10000){
+    notify("Enter a value between 0 and 10,000 Wh.");return;
+  }
+  state.simRunning=true;
+  $("runSim").disabled=true;
+  $("simStage").classList.remove("running");
+  $("car").style.transform="translateX(-150px)";
+  void $("simStage").offsetWidth;
+  $("simStage").classList.add("running");
+  const stages=[
+    ["VEHICLE APPROACHING","The vehicle moves toward the demonstration module."],
+    ["MODULE COMPRESSED","Vehicle load moves the conceptual upper plate."],
+    ["ENERGY CONVERSION","Mechanical movement drives the conceptual generator."],
+    ["ENERGY STORED","Conditioned electrical output could be stored for later use."]
+  ];
+  stages.forEach((s,i)=>{
+    simTimeouts.push(setTimeout(()=>{
+      $("simStatusSvg").textContent=s[0];
+      $("simExplanation").textContent=s[1];
+      for(let j=1;j<=4;j++)$("simStep"+j).classList.toggle("current",j===i+1);
+    },[0,1000,1900,2600][i]));
+  });
+  simTimeouts.push(setTimeout(()=>{
+    state.passes++;
+    state.energy+=val;
+    state.peakPower=val>0?Math.max(state.peakPower,Math.min(12,val*10)):state.peakPower;
+    updateMetrics();
+    addActivity("Simulated vehicle pass","Illustrative model event","+"+val.toFixed(2)+" Wh");
+    $("simStatusSvg").textContent="SIMULATION COMPLETE";
+    $("runSim").disabled=false;$("runSim").textContent="↻ Run another pass";
+    state.simRunning=false;
+    $("simStage").classList.remove("running");
+  },3600));
 });
-document.getElementById("logout").addEventListener("click", () => {
-  signedIn = false;
-  document.getElementById("authTitle").textContent = "Welcome Back";
-  document.getElementById("authMessage").textContent = "You have signed out of the demo.";
-  document.getElementById("login").style.display = "inline-block";
-  document.getElementById("logout").style.display = "none";
+
+function number(id){
+  const n=Number($(id).value);
+  return Number.isFinite(n)&&n>=0?n:0;
+}
+function calculateScenario(){
+  const traffic=Math.min(number("traffic"),100000000);
+  const perPass=Math.min(number("energyPass"),1000000);
+  const eff=Math.min(100,number("efficiency"))/100;
+  const days=Math.min(366,number("days"));
+  const modules=Math.max(1,Math.min(1000000,Math.floor(number("systems"))||1));
+  const daily=traffic*perPass*eff*modules;
+  $("dailyWh").textContent=daily.toLocaleString(undefined,{maximumFractionDigits:2});
+  $("annualKwh").textContent=(daily*days/1000).toLocaleString(undefined,{maximumFractionDigits:2});
+  $("avgPower").textContent=(daily/24).toLocaleString(undefined,{maximumFractionDigits:2});
+  $("calcStatus").textContent="Calculated from your assumptions";
+  const profile=[.12,.07,.05,.04,.08,.24,.55,.78,.69,.57,.60,.72,.76,.68,.63,.74,.90,.84,.55,.42,.30,.22,.16,.12];
+  drawChart("analyticsChart",profile.map(v=>v*daily/24));
+}
+$("calculate").addEventListener("click",calculateScenario);
+["traffic","energyPass","efficiency","days","systems"].forEach(id=>{
+  $(id).addEventListener("change",calculateScenario);
 });
-calculate();
+$("contactBtn").addEventListener("click",()=>{
+  const subject="SpeedBank — Student Innovation Project";
+  const body="Hello,\\n\\nI would like to learn more about the SpeedBank energy-harvesting concept.\\n\\n";
+  const mail="mailto:?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);
+  notify("Your email application will open if one is configured.");
+  window.location.href=mail;
+});
+calculateScenario();
+})();
 </script>
 </body>
 </html>
